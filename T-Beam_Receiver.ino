@@ -1,6 +1,6 @@
-# Software for TBeam AXP-2101 v1.2 TBEAM on Arduino Board
-# 29_12_2025
-# Autohor Giovanni Castellana 
+// Software for TBeam AXP-2101 v1.2 TBEAM on Arduino Board
+// 29_12_2025
+// Autohor Giovanni Castellana 
 
 #include <Arduino.h>
 #include <RadioLib.h>
@@ -25,7 +25,6 @@ static const float LORA_BW_KHZ   = 125.0;
 static const int   LORA_CR       = 5;
 static const int   LORA_SYNCWORD = 0x34;
 int Counter =0;
-
 // ---------- SPI instance ----------
 SPIClass spiLoRa(VSPI);
 Module loraModule(PIN_LORA_CS, PIN_LORA_DIO0, PIN_LORA_RST, PIN_LORA_DIO1,
@@ -56,7 +55,7 @@ void setup() {
 
   spiLoRa.begin(PIN_LORA_SCK, PIN_LORA_MISO, PIN_LORA_MOSI, PIN_LORA_CS);
 
-  int state = radio.begin(LORA_FREQ_MHZ, LORA_BW_KHZ, LORA_SF, LORA_CR);
+  int state = radio.begin(LORA_FREQ_MHZ, LORA_BW_KHZ, LORA_SF, LORA_CR); //Inizializza l'oggetto RADIO 
   if (state != RADIOLIB_ERR_NONE) {
     Serial.print("radio.begin failed, code="); Serial.println(state);
     while (true) delay(1000);
@@ -76,10 +75,7 @@ void setup() {
 
   Serial.println("LoRa RX ready.");
 
-   
 
-  
-  
 }
 
 void loop() {
@@ -105,7 +101,9 @@ void loop() {
   Serial.print(" fe=");   Serial.print(radio.getFrequencyError());
   Serial.print(" ");
 
-  //Inizializzazione del display grafico------------------
+
+
+   //Inizializzazione del display grafico------------------
   U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(
   U8G2_R0,      // rotazione (R0 = normale)
   U8X8_PIN_NONE // reset (non collegato)
@@ -113,7 +111,7 @@ void loop() {
   Wire.begin(21, 22);   // SDA, SCL (ESP32)
   u8g2.begin();         // inizializza display
   u8g2.clearBuffer();
-  u8g2.setFont(u8g2_font_6x10_tf);
+  u8g2.setFont(u8g2_font_6x10_tf); 
 
   u8g2.drawStr(0, 12, "    LoRa RX    ");
   String s = "RSSI: " + String(radio.getRSSI(), 1);
