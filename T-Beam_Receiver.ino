@@ -1,6 +1,6 @@
 // Software for TBeam AXP-2101 v1.2 TBEAM on Arduino Board
 // 29_12_2025
-// Autohor Giovanni Castellana 
+ 
 
 #include <Arduino.h>
 #include <RadioLib.h>
